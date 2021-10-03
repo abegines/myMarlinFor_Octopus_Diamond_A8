@@ -192,12 +192,14 @@
 
 // This defines the number of extruders
 // :[0, 1, 2, 3, 4, 5, 6, 7, 8]
+// BEGINES: Cambiar para Diamond
 #define EXTRUDERS 4
 
 // Generally expected filament diameter (1.75, 2.85, 3.0, ...). Used for Volumetric, Filament Width Sensor, etc.
 #define DEFAULT_NOMINAL_FILAMENT_DIA 1.75
 
 // For Cyclops or any "multi-extruder" that shares a single nozzle.
+// BEGINES: Cambiar para Diamond
 //#define SINGLENOZZLE
 
 // Save and restore temperature and fan speed on tool-change.
@@ -2243,10 +2245,14 @@
 //
 // ANET and Tronxy 20x4 Controller
 //
-//#define ZONESTAR_LCD            // Requires ADC_KEYPAD_PIN to be assigned to an analog pin.
+// BEGINES: Esta es la pantalla de la anetA8, pero estarán bien definidos los pines???
+#define ZONESTAR_LCD            // Requires ADC_KEYPAD_PIN to be assigned to an analog pin.
                                   // This LCD is known to be susceptible to electrical interference
                                   // which scrambles the display.  Pressing any button clears it up.
                                   // This is a LCD2004 display with 5 analog buttons.
+// BEGINES: NO SIRVE NI 1, NI 12???
+#define ADC_KEYPAD_PIN 1 
+
 
 //
 // Generic 16x2, 16x4, 20x2, or 20x4 character-based LCD.
@@ -2346,7 +2352,9 @@
 // RepRapDiscount FULL GRAPHIC Smart Controller
 // https://reprap.org/wiki/RepRapDiscount_Full_Graphic_Smart_Controller
 //
-#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
+// BEGINES: estaba definido este, lo cambié por ZONESTAR_LCD que es la de la anetA8
+//#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
+
 
 //
 // K.3D Full Graphic Smart Controller
