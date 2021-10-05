@@ -193,14 +193,14 @@
 // This defines the number of extruders
 // :[0, 1, 2, 3, 4, 5, 6, 7, 8]
 // BEGINES: Cambiar para Diamond
-#define EXTRUDERS 4
+#define EXTRUDERS 3
 
 // Generally expected filament diameter (1.75, 2.85, 3.0, ...). Used for Volumetric, Filament Width Sensor, etc.
 #define DEFAULT_NOMINAL_FILAMENT_DIA 1.75
 
 // For Cyclops or any "multi-extruder" that shares a single nozzle.
 // BEGINES: Cambiar para Diamond
-//#define SINGLENOZZLE
+#define SINGLENOZZLE
 
 // Save and restore temperature and fan speed on tool-change.
 // Set standby for the unselected tool with M104/106/109 T...
@@ -337,6 +337,7 @@
  *   - Optional support for Repetier Firmware's 'M164 S<index>' supporting virtual tools.
  *   - This implementation supports up to two mixing extruders.
  *   - Enable DIRECT_MIXING_IN_G1 for M165 and mixing in G1 (from Pia Taubert's reference implementation).
+ *  BEGINES: SE PODRÁ USAR PARA EL DIAMOND?????
  */
 //#define MIXING_EXTRUDER
 #if ENABLED(MIXING_EXTRUDER)
@@ -485,11 +486,12 @@
  *   998 : Dummy Table that ALWAYS reads 25°C or the temperature defined below.
  *   999 : Dummy Table that ALWAYS reads 100°C or the temperature defined below.
  *
+ * BEGINES: DEJAMOS SOLO UN TEMP_SENSOR_0 Y TEMP_SENSOR_BED
  */
 #define TEMP_SENSOR_0 1
-#define TEMP_SENSOR_1 1
-#define TEMP_SENSOR_2 1
-#define TEMP_SENSOR_3 1
+#define TEMP_SENSOR_1 0
+#define TEMP_SENSOR_2 0
+#define TEMP_SENSOR_3 0
 #define TEMP_SENSOR_4 0
 #define TEMP_SENSOR_5 0
 #define TEMP_SENSOR_6 0
@@ -720,9 +722,10 @@
 /**
  * Prevent a single extrusion longer than EXTRUDE_MAXLENGTH.
  * Note: For Bowden Extruders make this large enough to allow load/unload.
+ * BEGINES: TENDREMOS BOWDEN, POR LO QUE DEBEMOS CAMBIAR A 400??? (ANTES 200)
  */
 #define PREVENT_LENGTHY_EXTRUDE
-#define EXTRUDE_MAXLENGTH 200
+#define EXTRUDE_MAXLENGTH 400
 
 //===========================================================================
 //======================== Thermal Runaway Protection =======================
@@ -854,6 +857,7 @@
  *          TMC26X,  TMC26X_STANDALONE,  TMC2660, TMC2660_STANDALONE,
  *          TMC5130, TMC5130_STANDALONE, TMC5160, TMC5160_STANDALONE
  * :['A4988', 'A5984', 'DRV8825', 'LV8729', 'L6470', 'L6474', 'POWERSTEP01', 'TB6560', 'TB6600', 'TMC2100', 'TMC2130', 'TMC2130_STANDALONE', 'TMC2160', 'TMC2160_STANDALONE', 'TMC2208', 'TMC2208_STANDALONE', 'TMC2209', 'TMC2209_STANDALONE', 'TMC26X', 'TMC26X_STANDALONE', 'TMC2660', 'TMC2660_STANDALONE', 'TMC5130', 'TMC5130_STANDALONE', 'TMC5160', 'TMC5160_STANDALONE']
+ * BEGINES: HAY QUE ELEGIR EL STEPPER
  */
 //#define X_DRIVER_TYPE  TMC2209
 //#define Y_DRIVER_TYPE  TMC2209
@@ -920,6 +924,7 @@
  * Default Axis Steps Per Unit (steps/mm)
  * Override with M92
  *                                      X, Y, Z [, I [, J [, K]]], E0 [, E1[, E2...]]
+ * BEGINES: COMPROBAR Y AÑADIR DOS EXTRUDERS
  */
 #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 96 }
 
@@ -927,6 +932,7 @@
  * Default Max Feed Rate (mm/s)
  * Override with M203
  *                                      X, Y, Z [, I [, J [, K]]], E0 [, E1[, E2...]]
+ * BEGINES: COMPROBAR Y AÑADIR DOS EXTRUDERS
  */
 #define DEFAULT_MAX_FEEDRATE          { 200, 200, 5, 25 }
 
@@ -940,6 +946,7 @@
  * (Maximum start speed for accelerated moves)
  * Override with M201
  *                                      X, Y, Z [, I [, J [, K]]], E0 [, E1[, E2...]]
+ * BEGINES: COMPROBAR Y AÑADIR DOS EXTRUDERS
  */
 #define DEFAULT_MAX_ACCELERATION      { 1000, 1000, 100, 10000 }
 
@@ -955,6 +962,7 @@
  *   M204 P    Acceleration
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
+ *  BEGINES: COMPROBAR
  */
 #define DEFAULT_ACCELERATION          500    // X, Y, Z and E acceleration for printing moves
 #define DEFAULT_RETRACT_ACCELERATION  500    // E acceleration for retracts
@@ -1527,6 +1535,7 @@
  *   For machines without a probe, Mesh Bed Leveling provides a method to perform
  *   leveling in steps so you can manually adjust the Z height at each grid-point.
  *   With an LCD controller the process is guided step-by-step.
+ * BEGINES: DEBEMOS CONFIGURA UNO...
  */
 //#define AUTO_BED_LEVELING_3POINT
 //#define AUTO_BED_LEVELING_LINEAR
@@ -1845,7 +1854,7 @@
 //#define TEMPERATURE_UNITS_SUPPORT
 
 // @section temperature
-
+// BEGINES: AFINAR
 //
 // Preheat Constants - Up to 5 are supported without changes
 //
@@ -2246,12 +2255,12 @@
 // ANET and Tronxy 20x4 Controller
 //
 // BEGINES: Esta es la pantalla de la anetA8, pero estarán bien definidos los pines???
-#define ZONESTAR_LCD            // Requires ADC_KEYPAD_PIN to be assigned to an analog pin.
+//#define ZONESTAR_LCD            // Requires ADC_KEYPAD_PIN to be assigned to an analog pin.
                                   // This LCD is known to be susceptible to electrical interference
                                   // which scrambles the display.  Pressing any button clears it up.
                                   // This is a LCD2004 display with 5 analog buttons.
 // BEGINES: NO SIRVE NI 1, NI 12???
-#define ADC_KEYPAD_PIN 1 
+//#define ADC_KEYPAD_PIN 1 
 
 
 //
@@ -2352,8 +2361,8 @@
 // RepRapDiscount FULL GRAPHIC Smart Controller
 // https://reprap.org/wiki/RepRapDiscount_Full_Graphic_Smart_Controller
 //
-// BEGINES: estaba definido este, lo cambié por ZONESTAR_LCD que es la de la anetA8
-//#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
+// BEGINES: estaba definido este, sirve parala que compré TFT35 en modo emulación Marlin
+#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
 
 
 //
