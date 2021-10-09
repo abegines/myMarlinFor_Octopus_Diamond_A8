@@ -192,15 +192,15 @@
 
 // This defines the number of extruders
 // :[0, 1, 2, 3, 4, 5, 6, 7, 8]
-// BEGINES: Cambiar para Diamond
-#define EXTRUDERS 4
+// BEGINES: Cambiar 4 por 3 para Diamond
+#define EXTRUDERS 3
 
 // Generally expected filament diameter (1.75, 2.85, 3.0, ...). Used for Volumetric, Filament Width Sensor, etc.
 #define DEFAULT_NOMINAL_FILAMENT_DIA 1.75
 
 // For Cyclops or any "multi-extruder" that shares a single nozzle.
-// BEGINES: Cambiar para Diamond
-//#define SINGLENOZZLE
+// BEGINES: DEFINIR para Diamond
+#define SINGLENOZZLE
 
 // Save and restore temperature and fan speed on tool-change.
 // Set standby for the unselected tool with M104/106/109 T...
@@ -487,9 +487,10 @@
  *
  */
 #define TEMP_SENSOR_0 1
-#define TEMP_SENSOR_1 1
-#define TEMP_SENSOR_2 1
-#define TEMP_SENSOR_3 1
+//BEGINES: solo un sensor, pongo a 0 desde 1 hasta 7, dado que tengo un solo nozzle con Diamond
+#define TEMP_SENSOR_1 0
+#define TEMP_SENSOR_2 0
+#define TEMP_SENSOR_3 0
 #define TEMP_SENSOR_4 0
 #define TEMP_SENSOR_5 0
 #define TEMP_SENSOR_6 0
@@ -605,9 +606,9 @@
     #define DEFAULT_Ki_LIST {   1.08,   1.08 }
     #define DEFAULT_Kd_LIST { 114.00, 114.00 }
   #else
-    #define DEFAULT_Kp  22.20
-    #define DEFAULT_Ki   1.08
-    #define DEFAULT_Kd 114.00
+    #define DEFAULT_Kp 15.40 // ORIGINAL 22.20
+    #define DEFAULT_Ki 0.92  // ORIGINAL 1.08
+    #define DEFAULT_Kd 64.22 // ORIGINAL 114.00
   #endif
 #endif // PIDTEMP
 
@@ -628,7 +629,7 @@
  * heater. If your configuration is significantly different than this and you don't understand
  * the issues involved, don't use bed PID until someone else verifies that your hardware works.
  */
-//#define PIDTEMPBED
+#define PIDTEMPBED
 
 //#define BED_LIMIT_SWITCHING
 
@@ -646,9 +647,9 @@
 
   // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   // from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  #define DEFAULT_bedKp 10.00
-  #define DEFAULT_bedKi .023
-  #define DEFAULT_bedKd 305.4
+  #define DEFAULT_bedKp 24.48
+  #define DEFAULT_bedKi 3.15
+  #define DEFAULT_bedKd 126.70
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #endif // PIDTEMPBED
@@ -854,21 +855,22 @@
  *          TMC26X,  TMC26X_STANDALONE,  TMC2660, TMC2660_STANDALONE,
  *          TMC5130, TMC5130_STANDALONE, TMC5160, TMC5160_STANDALONE
  * :['A4988', 'A5984', 'DRV8825', 'LV8729', 'L6470', 'L6474', 'POWERSTEP01', 'TB6560', 'TB6600', 'TMC2100', 'TMC2130', 'TMC2130_STANDALONE', 'TMC2160', 'TMC2160_STANDALONE', 'TMC2208', 'TMC2208_STANDALONE', 'TMC2209', 'TMC2209_STANDALONE', 'TMC26X', 'TMC26X_STANDALONE', 'TMC2660', 'TMC2660_STANDALONE', 'TMC5130', 'TMC5130_STANDALONE', 'TMC5160', 'TMC5160_STANDALONE']
+ * BEGINES: ASIGNO X,Y,Z,Z2,E0,E1,E2 A DRV8825 POR AHORA
  */
-//#define X_DRIVER_TYPE  TMC2209
-//#define Y_DRIVER_TYPE  TMC2209
-//#define Z_DRIVER_TYPE  TMC2209
+#define X_DRIVER_TYPE  DRV8825
+#define Y_DRIVER_TYPE  DRV8825
+#define Z_DRIVER_TYPE  DRV8825
 //#define X2_DRIVER_TYPE A4988
 //#define Y2_DRIVER_TYPE A4988
-//#define Z2_DRIVER_TYPE A4988
+#define Z2_DRIVER_TYPE DRV8825
 //#define Z3_DRIVER_TYPE A4988
 //#define Z4_DRIVER_TYPE A4988
 //#define I_DRIVER_TYPE  A4988
 //#define J_DRIVER_TYPE  A4988
 //#define K_DRIVER_TYPE  A4988
-//#define E0_DRIVER_TYPE TMC2209
-//#define E1_DRIVER_TYPE TMC2209
-//#define E2_DRIVER_TYPE TMC2209
+#define E0_DRIVER_TYPE DRV8825
+#define E1_DRIVER_TYPE DRV8825
+#define E2_DRIVER_TYPE DRV8825
 //#define E3_DRIVER_TYPE TMC2209
 //#define E4_DRIVER_TYPE A4988
 //#define E5_DRIVER_TYPE A4988
@@ -921,7 +923,8 @@
  * Override with M92
  *                                      X, Y, Z [, I [, J [, K]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 96 }
+// begines antes 80,80,400,96
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 80, 96 }
 
 /**
  * Default Max Feed Rate (mm/s)
@@ -1315,9 +1318,10 @@
 // @section machine
 
 // Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
-#define INVERT_X_DIR false
-#define INVERT_Y_DIR true
-#define INVERT_Z_DIR false
+// BEGINES: antes false, true, false (todo al contrario)
+#define INVERT_X_DIR true
+#define INVERT_Y_DIR false
+#define INVERT_Z_DIR true
 //#define INVERT_I_DIR false
 //#define INVERT_J_DIR false
 //#define INVERT_K_DIR false
@@ -2190,6 +2194,7 @@
 //
 // Note: Usually sold with a white PCB.
 //
+//BEGINES: Este ha funcionado con el display que venía con la ANYCUBIC KOSSEL
 //#define REPRAP_DISCOUNT_SMART_CONTROLLER
 
 //
@@ -2246,12 +2251,12 @@
 // ANET and Tronxy 20x4 Controller
 //
 // BEGINES: Esta es la pantalla de la anetA8, pero estarán bien definidos los pines???
-#define ZONESTAR_LCD            // Requires ADC_KEYPAD_PIN to be assigned to an analog pin.
+//#define ZONESTAR_LCD            // Requires ADC_KEYPAD_PIN to be assigned to an analog pin.
                                   // This LCD is known to be susceptible to electrical interference
                                   // which scrambles the display.  Pressing any button clears it up.
                                   // This is a LCD2004 display with 5 analog buttons.
 // BEGINES: NO SIRVE NI 1, NI 12???
-#define ADC_KEYPAD_PIN 1 
+//#define ADC_KEYPAD_PIN 1 
 
 
 //
@@ -2352,8 +2357,8 @@
 // RepRapDiscount FULL GRAPHIC Smart Controller
 // https://reprap.org/wiki/RepRapDiscount_Full_Graphic_Smart_Controller
 //
-// BEGINES: estaba definido este, lo cambié por ZONESTAR_LCD que es la de la anetA8
-//#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
+// BEGINES: finalmente dejamos este que es el de la pantalla comprada 
+#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
 
 
 //
@@ -2769,7 +2774,8 @@
 
 // Set number of user-controlled fans. Disable to use all board-defined fans.
 // :[1,2,3,4,5,6,7,8]
-//#define NUM_M106_FANS 1
+// BEGINES: HE DEFINIDO CON UN 2 (ANTES COMENTADO)
+#define NUM_M106_FANS 2
 
 // Increase the FAN PWM frequency. Removes the PWM noise but increases heating in the FET/Arduino
 //#define FAST_PWM_FAN
