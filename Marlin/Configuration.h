@@ -337,6 +337,7 @@
  *   - Optional support for Repetier Firmware's 'M164 S<index>' supporting virtual tools.
  *   - This implementation supports up to two mixing extruders.
  *   - Enable DIRECT_MIXING_IN_G1 for M165 and mixing in G1 (from Pia Taubert's reference implementation).
+ *  BEGINES: SE PODRÁ USAR PARA EL DIAMOND?????
  */
 //#define MIXING_EXTRUDER
 #if ENABLED(MIXING_EXTRUDER)
@@ -485,6 +486,7 @@
  *   998 : Dummy Table that ALWAYS reads 25°C or the temperature defined below.
  *   999 : Dummy Table that ALWAYS reads 100°C or the temperature defined below.
  *
+ * BEGINES: DEJAMOS SOLO UN TEMP_SENSOR_0 Y TEMP_SENSOR_BED
  */
 #define TEMP_SENSOR_0 1
 //BEGINES: solo un sensor, pongo a 0 desde 1 hasta 7, dado que tengo un solo nozzle con Diamond
@@ -721,9 +723,10 @@
 /**
  * Prevent a single extrusion longer than EXTRUDE_MAXLENGTH.
  * Note: For Bowden Extruders make this large enough to allow load/unload.
+ * BEGINES: TENDREMOS BOWDEN, POR LO QUE DEBEMOS CAMBIAR A 400??? (ANTES 200)
  */
 #define PREVENT_LENGTHY_EXTRUDE
-#define EXTRUDE_MAXLENGTH 200
+#define EXTRUDE_MAXLENGTH 400
 
 //===========================================================================
 //======================== Thermal Runaway Protection =======================
@@ -922,6 +925,7 @@
  * Default Axis Steps Per Unit (steps/mm)
  * Override with M92
  *                                      X, Y, Z [, I [, J [, K]]], E0 [, E1[, E2...]]
+ * BEGINES: COMPROBAR Y AÑADIR DOS EXTRUDERS
  */
 // begines antes 80,80,400,96
 #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 80, 96 }
@@ -930,6 +934,7 @@
  * Default Max Feed Rate (mm/s)
  * Override with M203
  *                                      X, Y, Z [, I [, J [, K]]], E0 [, E1[, E2...]]
+ * BEGINES: COMPROBAR Y AÑADIR DOS EXTRUDERS
  */
 #define DEFAULT_MAX_FEEDRATE          { 200, 200, 5, 25 }
 
@@ -943,6 +948,7 @@
  * (Maximum start speed for accelerated moves)
  * Override with M201
  *                                      X, Y, Z [, I [, J [, K]]], E0 [, E1[, E2...]]
+ * BEGINES: COMPROBAR Y AÑADIR DOS EXTRUDERS
  */
 #define DEFAULT_MAX_ACCELERATION      { 1000, 1000, 100, 10000 }
 
@@ -958,6 +964,7 @@
  *   M204 P    Acceleration
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
+ *  BEGINES: COMPROBAR
  */
 #define DEFAULT_ACCELERATION          500    // X, Y, Z and E acceleration for printing moves
 #define DEFAULT_RETRACT_ACCELERATION  500    // E acceleration for retracts
@@ -1531,6 +1538,7 @@
  *   For machines without a probe, Mesh Bed Leveling provides a method to perform
  *   leveling in steps so you can manually adjust the Z height at each grid-point.
  *   With an LCD controller the process is guided step-by-step.
+ * BEGINES: DEBEMOS CONFIGURA UNO...
  */
 //#define AUTO_BED_LEVELING_3POINT
 //#define AUTO_BED_LEVELING_LINEAR
@@ -1849,7 +1857,7 @@
 //#define TEMPERATURE_UNITS_SUPPORT
 
 // @section temperature
-
+// BEGINES: AFINAR
 //
 // Preheat Constants - Up to 5 are supported without changes
 //
